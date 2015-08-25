@@ -243,14 +243,7 @@ def download_message(url):
 
 
 if __name__ == '__main__':
-#    print "Hello,Only allow download historical data within 7 days,Now please enter your app-key,app-secret and date of message !!! "
-#    app_key = raw_input("Enter your app-key: ")
-#    app_secret = raw_input("Enter your app-secret: ")
-#    date = raw_input("Enter your date of messages ,for exaemple: 'At 1 am on January 1, 2015' is '2015010101' :")
-#    while len(date) != 10:
-#        date = raw_input("Enter your date of messages ,for exaemple: 'At 1 am on January 1, 2015' is '2015010101' :")
-#        if len(date) == 10:
-#            break
+
     date1 = str(int(time.strftime('%Y%m%d%H',time.localtime(time.time()))) - 3)
     api1 = ApiClient()
     json_value1 = api1.message_history(date1)
