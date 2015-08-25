@@ -9,8 +9,9 @@ import logging
 import random
 import datetime
 import hashlib
-import requests
 import commands
+commands.getoutput('easy_install requests')
+import requests
 
 
 class ConnectionError(Exception):
@@ -242,16 +243,24 @@ def download_message(url):
 
 
 if __name__ == '__main__':
-    print "Hello,Only allow download historical data within 7 days,Now please enter your app-key,app-secret and date of message !!! "
-    app_key = raw_input("Enter your app-key: ")
-    app_secret = raw_input("Enter your app-secret: ")
-    date = raw_input("Enter your date of messages ,for exaemple: 'At 1 am on January 1, 2015' is '2015010101' :")
-    while len(date) != 10:
-        date = raw_input("Enter your date of messages ,for exaemple: 'At 1 am on January 1, 2015' is '2015010101' :")
-        if len(date) == 10:
-            break
-    api = ApiClient(app_key,app_secret)
-    json_value = api.message_history(date)
-    message_url = json_value["url"]
-    print message_url
-    download_message(message_url)
+#    print "Hello,Only allow download historical data within 7 days,Now please enter your app-key,app-secret and date of message !!! "
+#    app_key = raw_input("Enter your app-key: ")
+#    app_secret = raw_input("Enter your app-secret: ")
+#    date = raw_input("Enter your date of messages ,for exaemple: 'At 1 am on January 1, 2015' is '2015010101' :")
+#    while len(date) != 10:
+#        date = raw_input("Enter your date of messages ,for exaemple: 'At 1 am on January 1, 2015' is '2015010101' :")
+#        if len(date) == 10:
+#            break
+    date1 = str(int(time.strftime('%Y%m%d%H',time.localtime(time.time()))) - 3)
+    api1 = ApiClient()
+    json_value1 = api1.message_history(date1)
+    message_url1 = json_value1["url"]
+    print message_url1
+    download_message(message_url1)
+
+    date2 = str(int(time.strftime('%Y%m%d%H',time.localtime(time.time()))) - 2)
+    api2 = ApiClient()
+    json_value2 = api2.message_history(date2)
+    message_url2 = json_value2["url"]
+    print message_url2
+    download_message(message_url2)
