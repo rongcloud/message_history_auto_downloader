@@ -3,6 +3,8 @@
 
 import os
 import re
+import ConfigParser
+sys.path.append('./')
 import json
 import time
 import logging
