@@ -110,12 +110,6 @@ class ApiClient(object):
         self._app_key = key
         self._app_secret = secret
 
-#        if self._app_key is None:
-#            self._app_key = os.environ.get('rongcloud_app_key')
-#        if self._app_secret is None:
-#            self._app_secret = os.environ.get('rongcloud_app_secret')
-
-
     @staticmethod
     def _merge_dict(data, *override):
         result = {}
