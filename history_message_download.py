@@ -4,7 +4,6 @@
 import os,sys
 import re
 import ConfigParser
-sys.path.append('./')
 import json
 import time
 import logging
@@ -235,12 +234,15 @@ class ApiClient(object):
         )
 
 def download_message(url):
-    commands.getoutput('wget -c %s' % url)    
+    commands.getoutput('wget -c -P %s %s' % (local_dir,url))    
 
 
 if __name__ == '__main__':
+
+    local_dir = sys.argv[1]
+
     config=ConfigParser.ConfigParser()
-    config.read("app_info.ini")
+    config.read("%s/app_info.ini" % local_dir)
     App_key=config.get('info','rongcloud_app_key')
     App_secret=config.get('info','rongcloud_app_secret')
 
