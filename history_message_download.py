@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 # coding=utf-8
 
-import os
+import os,sys
 import re
 import ConfigParser
 sys.path.append('./')
@@ -110,10 +110,10 @@ class ApiClient(object):
         self._app_key = key
         self._app_secret = secret
 
-        if self._app_key is None:
-            self._app_key = os.environ.get('rongcloud_app_key')
-        if self._app_secret is None:
-            self._app_secret = os.environ.get('rongcloud_app_secret')
+#        if self._app_key is None:
+#            self._app_key = os.environ.get('rongcloud_app_key')
+#        if self._app_secret is None:
+#            self._app_secret = os.environ.get('rongcloud_app_secret')
 
 
     @staticmethod
@@ -245,16 +245,20 @@ def download_message(url):
 
 
 if __name__ == '__main__':
+    config=ConfigParser.ConfigParser()
+    config.read("app_info.ini")
+    App_key=config.get('info','rongcloud_app_key')
+    App_secret=config.get('info','rongcloud_app_secret')
 
     date1 = str(int(time.strftime('%Y%m%d%H',time.localtime(time.time()))) - 3)
-    api1 = ApiClient()
+    api1 = ApiClient(App_key,App_secret)
     json_value1 = api1.message_history(date1)
     message_url1 = json_value1["url"]
     print message_url1
     download_message(message_url1)
 
     date2 = str(int(time.strftime('%Y%m%d%H',time.localtime(time.time()))) - 2)
-    api2 = ApiClient()
+    api2 = ApiClient(App_key,App_secret)
     json_value2 = api2.message_history(date2)
     message_url2 = json_value2["url"]
     print message_url2
